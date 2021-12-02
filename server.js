@@ -1,29 +1,31 @@
-const express = require('express')
-const db = require('inquirer')
+const db = require('./db')
+const logo = require('asciiart-logo')
+require("console.table")
+const {prompt} = require("inquirer")
 
-const PORT = process.env.PORT || 4000;
-const app = express();
+let init = () => {
+  const logo = logo({name: "employee tracker" })
+  console.log(logo)
+}
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+let questions = () => {
+  prompt([
+    {
+      message: "What do you want to do?",
+      type: "list",
+      name: "options",
+      choices: [
+        {}
+      ]
+    }
+  ])
+}
 
+function findEmployee() {
+  db.findEmployee().then(([rows]) => {
+    let employee = rows;
+    console.table(employee)
+  }).then(() => questions())
+}
 
-db.query('SELECT * FROM department', function (err, results) {
-  console.log(results)
-})
-
-db.query('SELECT * FROM role', function (err, results) {
-  console.log(results)
-})
-
-db.query('SELECT * FROM employee', function (err, results) {
-  console.log(results)
-})
-
-app.use((req, res) => {
-    res.status(404).end();
-  });
-  
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
+init()
