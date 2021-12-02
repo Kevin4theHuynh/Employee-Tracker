@@ -1,6 +1,5 @@
 const express = require('express')
-const mysql = require('mysql2')
-const dotenv = require('dotenv')
+const db = require('inquirer')
 
 const PORT = process.env.PORT || 4000;
 const app = express();
@@ -8,14 +7,18 @@ const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const db = mysql.createConnection(
-  {
-    host: 'localhost',
-    user: 'root',
-    password: '',
-  },
-  console.log(`Connected`)
-)
+
+db.query('SELECT * FROM department', function (err, results) {
+  console.log(results)
+})
+
+db.query('SELECT * FROM role', function (err, results) {
+  console.log(results)
+})
+
+db.query('SELECT * FROM employee', function (err, results) {
+  console.log(results)
+})
 
 app.use((req, res) => {
     res.status(404).end();
