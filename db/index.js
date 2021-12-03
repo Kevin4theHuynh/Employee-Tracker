@@ -1,9 +1,11 @@
-const index = require('./connect')
+const connect = require('./connect')
 
-class db {constructor(index){this.index= index}}
+class db {constructor(connect){this.connect = connect}}
 
-findEmployee() 
-{return this.index.promise().query(`SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, employee.manager_id`)}
+findEmployee() {
+return this.connect.promise().query("SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, employee.manager_id");
+}
+
 
 findRole()
 {return this.index.promise().query(`SELECT role.id, role.title, role.salary, role.department_id`)}

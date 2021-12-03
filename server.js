@@ -4,8 +4,10 @@ require("console.table")
 const {prompt} = require("inquirer")
 
 let init = () => {
-  const logo = logo({name: "employee tracker" })
+  const logo = logo({name: "Employee Tracker" })
   console.log(logo)
+
+  questions();
 }
 
 let questions = () => {
@@ -15,10 +17,27 @@ let questions = () => {
       type: "list",
       name: "options",
       choices: [
-        {}
+        {
+          name: 'Find All Employees',
+          value: 'FIND_EMPLOYEE'
+        },
+        {
+
+        }
       ]
     }
-  ])
+  ]).then(res => {
+    let choice = res.choice;
+    switch (choice) {
+      case 'FIND_EMPLOYEE':
+        findEmployee();
+        break;
+
+        default:
+          quit();
+    }
+  }
+  )
 }
 
 function findEmployee() {
