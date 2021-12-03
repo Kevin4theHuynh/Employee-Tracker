@@ -4,18 +4,17 @@ const connect = require('./dbinfo')
 
 
 
-const db = mysql.createConnection(
+const connect = mysql.createConnection(
     {
-      host: connect.db_host,
-      user: connect.db_user,
-      password: connect.db_pass,
-      port: connect.db_port,
+      host: 'localhost',
+      user: 'root',
+      password: '',
       database: 'employee_db'
     },
     console.log(`Connected`)
   )
-db.connect(function (error) {
+connect.connect(function (error) {
     if (error) throw error
 })
 
-module.exports = db
+module.exports = connect
