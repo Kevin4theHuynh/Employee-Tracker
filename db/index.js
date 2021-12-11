@@ -1,8 +1,12 @@
 const connect = require('./connect')
 
-class db {constructor(connect){this.connect = connect}}
+class DB {
+    constructor(connect) {
+        this.connect = connect;
+    }
+}
 
-findEmployee() {
+findEmployee(){
 return this.connect.promise().query("SELECT employee.id, employee.first_name, employee.last_name, employee.role_id, employee.manager_id");
 }
 
