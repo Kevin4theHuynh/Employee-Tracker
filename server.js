@@ -73,17 +73,37 @@ let questions = () => {
         return addDepartment()
         break;
       case "REMOVE_EMPLOYEE":
-        return removeEmplyee()
+        return removeEmpolyee()
         break;
         default: quit()
     }
   })
-
-function findEmployee() {
-  db.findEmployee().then(([rows]) => {
-    let employee = rows;
-    console.table(employee)
-  }).then(() => questions())
 }
 
-init()
+function findEmployee() {
+  db.findEmployee()
+  .then(([row]) => {
+    let empolyee = row
+
+  })
+  .then(() => questions())
+}
+
+function addEmployee() {
+  db.findEmployee()
+  .then(([row]) => {
+    let employee = row
+    const employeeChoice = employee.map(({
+      id, first_name, last_name
+    }) => 
+    ({name: `${first_name} ${last_name}`, value: id}))
+    prompt([
+      {
+        type: 'list',
+        name: 'employeeID',
+        message: 'Whos role would you like to update',
+        choices: employeeChoice
+      }
+    ])
+
+  }
